@@ -1,0 +1,25 @@
+{
+  "name": "tools",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build",
+    "clean": "rm -rf dist",
+    "cleaner": "rm -rf dist node_modules .parcel-cache"
+  },
+  "alias": {
+    "react": "preact/compat",
+    "react-dom/test-utils": "preact/test-utils",
+    "react/jsx-runtime": "preact/jsx-runtime"
+  },
+  "dependencies": {
+    "preact": "^10.6.4",
+    "preact-render-to-string": "^5.1.19",
+    "preact-router": "^3.2.1"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.1",
+    "parcel": "^2.0.1",
+    "typescript": "^4.5.4"
+  }
+}
