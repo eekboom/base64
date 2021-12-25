@@ -1,1 +1,10 @@
-export const App = () => <h1>Hello world!</h1>
+import Base64 from "./Base64";
+
+export const App = () => {
+    return (
+        <div>
+            <h1>Base64 Encoder</h1>
+            <Base64/>
+        </div>
+    );
+}
