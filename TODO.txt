@@ -1,21 +1,36 @@
 Doing
------
-
+=====
+- chose character encoding
 
 To Do
------
+=====
 - styling
-- make accessible via eekboom.io
-- Intro text
-- option to wrap at 76
-- option to chose text encoding
+- options
+    - option to wrap at 76 (or any other margin?)
+    - option to encode each line separately
+    - option to select newline separator
+    - option to include/exclude padding ('=' characters at the end)
+    - URL-safe base64 option ('+' and '/' are replaced by '-' and '_', no padding with '=')
+- github badges/actions?
+- text
+    - intro
+    - base 64 explanation
+    - help/info texts for encoding and for each option
+    - contact info (?)
+    - bug report link
+    - pointer to github repo
+    - translations of intro and info texts
 - upload binary data for example for inline images (<img src="data:image/jped;base64...
-- URL-safe base64 option ('+' and '/' are replaced by '-' and '_')
-- option to include/exclude padding ('=' characters at the end)
 - unit tests (enzyme?)
 - seo
-
+- offline use?
+- server side rendering?
+- show which characters exactly are outside of the selected encoding
+- favicon(s)
+- make accessible via eekboom.io
+- bundle only the most common character encodings and load others on demand if needed?
+- base64 *de*coder
 
 Done
-----
+====
 - publish at github pages
