@@ -19,6 +19,7 @@ function Base64(props: MyProps) {
     }
 
     return <>
+        <div>Input Text (only characters from ISO-8859-1 allowed)</div>
         <textarea value={myValue} onChange={handleChange} cols={60}/>
 
         <div>Base 64:</div>

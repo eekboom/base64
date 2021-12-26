@@ -1,0 +1,21 @@
+Doing
+-----
+
+
+To Do
+-----
+- styling
+- make accessible via eekboom.io
+- Intro text
+- option to wrap at 76
+- option to chose text encoding
+- upload binary data for example for inline images (<img src="data:image/jped;base64...
+- URL-safe base64 option ('+' and '/' are replaced by '-' and '_')
+- option to include/exclude padding ('=' characters at the end)
+- unit tests (enzyme?)
+- seo
+
+
+Done
+----
+- publish at github pages

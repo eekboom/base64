@@ -3,14 +3,10 @@
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build",
+    "build": "parcel build --public-url ./",
+    "update-github-page": "parcel build --public-url ./ --dist-dir docs --no-source-maps",
     "clean": "rm -rf dist",
     "cleaner": "rm -rf dist node_modules .parcel-cache"
-  },
-  "alias": {
-    "react": "preact/compat",
-    "react-dom/test-utils": "preact/test-utils",
-    "react/jsx-runtime": "preact/jsx-runtime"
   },
   "dependencies": {
     "preact": "^10.6.4",
