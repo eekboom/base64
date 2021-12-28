@@ -4,7 +4,7 @@
   "scripts": {
     "start": "parcel",
     "build": "parcel build --public-url ./",
-    "update-github-page": "parcel build --public-url ./ --dist-dir docs --no-source-maps",
+    "update-github-page": "rm docs/* && parcel build --public-url ./ --dist-dir docs --no-source-maps",
     "clean": "rm -rf dist",
     "cleaner": "rm -rf dist node_modules .parcel-cache"
   },

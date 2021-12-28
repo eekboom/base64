@@ -5,13 +5,16 @@ Doing
 To Do
 =====
 - styling
+- use something else than this file (github issues, github "projects", trello, ...?)
 - options
-    - option to wrap at 76 (or any other margin?)
+    - when wrapping is on: option to choose another margin than 76
     - option to encode each line separately
     - option to select newline separator
     - option to include/exclude padding ('=' characters at the end)
     - URL-safe base64 option ('+' and '/' are replaced by '-' and '_', no padding with '=')
+    - include/exclude BOM for unicode encodings
 - github badges/actions?
+- add tslint
 - text
     - intro
     - base 64 explanation
@@ -34,3 +37,5 @@ To Do
 Done
 ====
 - publish at github pages
+- options
+    - option to wrap at 76
