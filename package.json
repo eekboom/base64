@@ -2,11 +2,31 @@
   "name": "tools",
   "source": "src/index.html",
   "scripts": {
-    "start": "parcel",
-    "build": "parcel build --public-url ./",
-    "update-github-page": "rm docs/* && parcel build --public-url ./ --dist-dir docs --no-source-maps",
-    "clean": "rm -rf dist",
-    "cleaner": "rm -rf dist node_modules .parcel-cache"
+    "//": "run from a separate build dir, so that 'dist' does not interfere with this",
+    "start": "parcel --dist-dir build",
+
+    "//": "Create a 'dist' directory that can be deployed to a server (or just open dist/index.html in IDEA with Open in -> Browser)",
+    "dist": "run-s check clean:dist assemble",
+    "assemble": "parcel build --public-url ./",
+
+    "//": "Runs linters, type checks, and (in the future) test",
+    "check": "run-p --aggregate-output --continue-on-error check:*",
+    "check:eslint": "eslint src --max-warnings=0 --ext .js,.jsx,.ts,.tsx",
+    "//": "We need to run tsc explicitly for type checking, because parcel runs its own, faster Typescript compiler, that does not check types at all",
+    "check:tsc": "tsc --noEmit",
+
+    "//": "the github page at http://eekboom.github.io/base64 serves the contents of the 'docs' folder",
+    "update-github-page": "run-s check docs:clean docs:build",
+    "docs:build": "parcel build --public-url ./ --dist-dir docs --no-source-maps",
+    "docs:clean": "rm -rf docs/*",
+    "docs:git-add": "git add docs",
+
+    "clean": "run-s clean:build clean:dist",
+    "cleaner": "run-s clean:*",
+    "clean:build": "rm -rf build",
+    "clean:dist": "rm -rf dist",
+    "clean:node_modules": "rm -rf node_modules",
+    "clean:parcel-cache": "rm -rf .parcel-cache"
   },
   "dependencies": {
     "iconv-lite": "^0.6.3",
@@ -16,6 +36,10 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
+    "eslint": "^8.6.0",
+    "npm-run-all": "^4.1.5",
     "parcel": "^2.0.1",
     "typescript": "^4.5.4"
   }
