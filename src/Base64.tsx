@@ -1,27 +1,18 @@
 import {decode, encode} from "iconv-lite";
-import {useState} from "preact/compat";
+import {useState} from "preact/hooks";
+import {JSX} from "preact";
 
-type MyProps = {}
+// Asked here how to type event handlers without accessing the JSXInternal package: https://github.com/preactjs/preact/discussions/3390
+import {JSXInternal} from "preact/src/jsx";
+import TargetedEvent = JSXInternal.TargetedEvent;
 
-function Base64(props: MyProps) {
+function Base64(): JSX.Element {
     const [textInputValue, setTextInputValue] = useState("");
     const [wrapOutput, setWrapOutput] = useState(false);
     const [encodingName, setEncodingName] = useState("UTF-8");
     const wrapAt = 76;
 
-    function handleInputChanged(event) {
-        setTextInputValue(event.target.value);
-    }
-
-    function handleEncodingChanged(event) {
-        setEncodingName(event.target.value);
-    }
-
-    function handleWrapOutputChanged(event) {
-        setWrapOutput(!wrapOutput);
-    }
-
-    function wrap(text: string, wrapAt) {
+    function wrap(text: string, wrapAt: number): string {
         let result = "";
         let sep = ""
         for(let i = 0; i < text.length; i += wrapAt) {
@@ -31,7 +22,7 @@ function Base64(props: MyProps) {
         return result;
     }
 
-    const base64Encode = (text: string, encodingName: string): string => {
+    function base64Encode(text: string, encodingName: string): string {
         try {
             const data: Buffer = encode(text, encodingName);
             const decodedString = decode(data, encodingName);
@@ -48,10 +39,13 @@ function Base64(props: MyProps) {
 
     return <>
         <div>Input Text</div>
-        <textarea value={textInputValue} onChange={handleInputChanged} cols={80}/>
+        <textarea value={textInputValue}
+                  onInput={(event: TargetedEvent<HTMLTextAreaElement>): void => setTextInputValue(event.currentTarget.value)}
+                  cols={80}/>
 
         <div>Encoding:</div>
-        <select value={encodingName} onChange={handleEncodingChanged}>
+        <select value={encodingName}
+                onChange={(event: TargetedEvent<HTMLSelectElement>): void => setEncodingName(event.currentTarget.value)}>
             <option>UTF-8</option>
             <option>ISO-8859-15</option>
             <option>ISO-8859-1</option>
@@ -65,9 +59,9 @@ function Base64(props: MyProps) {
         </select>
 
         <div>Base 64:</div>
-        <input id="wrap-output" type="checkbox" checked={wrapOutput} onClick={handleWrapOutputChanged}/>
+        <input id="wrap-output" type="checkbox" checked={wrapOutput} onClick={(): void => setWrapOutput(!wrapOutput)}/>
         <label for="wrap-output">Wrap at 76 characters</label>
-        <div><textarea id="base64-output" value={base64Encode(textInputValue, encodingName)} cols={80} readonly="readonly"/></div>
+        <div><textarea id="base64-output" value={base64Encode(textInputValue, encodingName)} cols={80} readonly/></div>
     </>;
 }
 
