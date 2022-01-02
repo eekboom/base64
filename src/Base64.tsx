@@ -1,5 +1,5 @@
 import {decode, encode} from "iconv-lite";
-import {useState} from "preact/compat";
+import {useState} from "preact/hooks";
 import {JSX} from "preact";
 
 // Asked here how to type event handlers without accessing the JSXInternal package: https://github.com/preactjs/preact/discussions/3390
@@ -61,7 +61,7 @@ function Base64(): JSX.Element {
         <div>Base 64:</div>
         <input id="wrap-output" type="checkbox" checked={wrapOutput} onClick={(): void => setWrapOutput(!wrapOutput)}/>
         <label for="wrap-output">Wrap at 76 characters</label>
-        <div><textarea id="base64-output" value={base64Encode(textInputValue, encodingName)} cols={80} readonly={true}/></div>
+        <div><textarea id="base64-output" value={base64Encode(textInputValue, encodingName)} cols={80} readonly/></div>
     </>;
 }
 

@@ -7,6 +7,7 @@ module.exports = {
     },
     plugins: [
         '@typescript-eslint',
+        "react-hooks",
     ],
     extends: [
         'eslint:recommended',
@@ -15,5 +16,6 @@ module.exports = {
     ],
     rules: {
         "@typescript-eslint/explicit-function-return-type": "warn",
+        "react-hooks/rules-of-hooks": "error"
     }
 };
