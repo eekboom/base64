@@ -1,4 +1,4 @@
 import {render} from "preact";
-import {App} from "./App";
+import Base64 from "./Base64";
 
-render(<App />, document.body);
+render(<Base64 />, document.body);

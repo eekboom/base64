@@ -4,7 +4,7 @@ Doing
 
 To Do
 =====
-- styling
+- does not work on Internet Explorer. Do we need this?
 - use something else than this file (github issues, github "projects", trello, ...?)
 - options
     - when wrapping is on: option to choose another margin than 76
@@ -13,10 +13,15 @@ To Do
     - option to include/exclude padding ('=' characters at the end)
     - URL-safe base64 option ('+' and '/' are replaced by '-' and '_', no padding with '=')
     - include/exclude BOM for unicode encodings
+- button to copy output to clipboard
+  Use writeText() from clipboard api, see https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
+  not supported by IE, though
+  Maybe this one? https://github.com/zenorocha/clipboard.js/ (another 3KB zipped, though)
 - github badges/actions?
-- add tslint
+- better styling
 - text
     - intro
+    - privacy (no cookies, pure client side)
     - base 64 explanation
     - help/info texts for encoding and for each option
     - contact info (?)
@@ -36,6 +41,8 @@ To Do
 
 Done
 ====
+- styling
+- add tslint
 - publish at github pages
 - options
     - option to wrap at 76
