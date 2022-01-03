@@ -3,7 +3,7 @@
   "source": "src/index.html",
   "scripts": {
     "// run from a separate build dir, so that 'dist' does not interfere with this": "",
-    "start": "parcel --dist-dir build",
+    "start": "parcel --https --dist-dir build",
     "// Create a 'dist' directory that can be deployed to a server (or just open dist/index.html in IDEA with Open in -> Browser)": "",
     "dist": "run-s check clean:dist assemble",
     "assemble": "parcel build --public-url ./",

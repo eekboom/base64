@@ -44,6 +44,13 @@ function Base64(): JSX.Element {
         setSeparatedLines(newSeparatedLines)
     }
 
+    function copyBase64ToClipboard(): void {
+        navigator
+            .clipboard
+            .writeText(encodeTextInput())
+            .catch(() => console.warn("Failed to copy to clipboard"))
+    }
+
     return (
         <form id="base64">
             <header>Base 64 Encoder</header>
@@ -83,6 +90,8 @@ function Base64(): JSX.Element {
                       value={encodeTextInput()}
                       readonly
                       spellcheck={false}/>
+
+            {navigator?.clipboard?.writeText && <button id="copy-to-clipboard" type="button" onClick={copyBase64ToClipboard}>Copy to Clipboard</button>}
         </form>
     );
 }
