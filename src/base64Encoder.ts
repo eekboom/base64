@@ -1,4 +1,5 @@
 import {decode, encode} from "iconv-lite";
+import { encoding2name } from "./encodings";
 
 export function wrap(text: string, wrapAt: number): string {
     let result = "";
@@ -10,17 +11,17 @@ export function wrap(text: string, wrapAt: number): string {
     return result;
 }
 
-export function base64Encode(text: string, encodingName: string): string {
+export function base64Encode(text: string, encoding: string): string {
     try {
-        const data: Buffer = encode(text, encodingName);
-        const decodedString = decode(data, encodingName);
+        const data: Buffer = encode(text, encoding);
+        const decodedString = decode(data, encoding);
         if (text != decodedString) {
-            return `Input contains characters outside of ${encodingName}`;
+            return `Input contains characters outside of ${encoding2name.get(encoding)}`;
         }
         const binaryString = data.toString("binary");
         return btoa(binaryString);
     } catch (e) {
-        return `Input contains characters outside of ${encodingName}`;
+        return `Input contains characters outside of ${encoding}`;
     }
 }
 
