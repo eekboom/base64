@@ -1,40 +1,43 @@
-import {decode, encode} from "iconv-lite";
 import {useState} from "preact/hooks";
 import {JSX} from "preact";
 
 // Asked here how to type event handlers without accessing the JSXInternal package: https://github.com/preactjs/preact/discussions/3390
 import {JSXInternal} from "preact/src/jsx";
+import {base64Encode, base64EncodeLinesSeparately, wrap} from "./utils";
 import TargetedEvent = JSXInternal.TargetedEvent;
 
 function Base64(): JSX.Element {
     const [textInputValue, setTextInputValue] = useState("");
     const [wrapOutput, setWrapOutput] = useState(false);
     const [encodingName, setEncodingName] = useState("UTF-8");
+    const [separatedLines, setSeparatedLines] = useState(false)
+
     const wrapAt = 76;
 
-    function wrap(text: string, wrapAt: number): string {
-        let result = "";
-        let sep = ""
-        for(let i = 0; i < text.length; i += wrapAt) {
-            result += sep + text.substring(i, Math.min(i + wrapAt, text.length));
-            sep = "\n";
+    function encodeTextInput(): string {
+        if (separatedLines) {
+            if (wrapOutput) {
+                return "Invalid Configuration: It is not possible to select the 'wrap output' and 'encode lines separately' options together."
+            }
+            return base64EncodeLinesSeparately(textInputValue, encodingName);
+        } else {
+            const output = base64Encode(textInputValue, encodingName)
+            return wrapOutput ? wrap(output, wrapAt) : output;
         }
-        return result;
     }
 
-    function base64Encode(text: string, encodingName: string): string {
-        try {
-            const data: Buffer = encode(text, encodingName);
-            const decodedString = decode(data, encodingName);
-            if (text != decodedString) {
-                return `Input contains characters outside of ${encodingName}`;
-            }
-            const binaryString = data.toString("binary");
-            const base64 = btoa(binaryString);
-            return wrapOutput ? wrap(base64, wrapAt) : base64;
-        } catch (e) {
-            return `Input contains characters outside of ${encodingName}`;
+    function handleWrapOutputChanged(): void {
+        if (separatedLines && !wrapOutput) {
+            setSeparatedLines(false)
         }
+        setWrapOutput(!wrapOutput);
+    }
+
+    function handleSeparatedLinesChanged(): void {
+        if (wrapOutput && !separatedLines) {
+            setWrapOutput(false);
+        }
+        setSeparatedLines(!separatedLines)
     }
 
     return <>
@@ -59,9 +62,15 @@ function Base64(): JSX.Element {
         </select>
 
         <div>Base 64:</div>
-        <input id="wrap-output" type="checkbox" checked={wrapOutput} onClick={(): void => setWrapOutput(!wrapOutput)}/>
-        <label for="wrap-output">Wrap at 76 characters</label>
-        <div><textarea id="base64-output" value={base64Encode(textInputValue, encodingName)} cols={80} readonly/></div>
+        <div>
+            <input id="wrap-output" type="checkbox" checked={wrapOutput} onClick={handleWrapOutputChanged}/>
+            <label for="wrap-output">Wrap at 76 characters</label>
+        </div>
+        <div>
+            <input id="encode-lines" type="checkbox" checked={separatedLines} onClick={handleSeparatedLinesChanged}/>
+            <label for="encode-lines">Encode each line separately</label>
+        </div>
+        <div><textarea id="base64-output" value={encodeTextInput()} cols={80} readonly/></div>
     </>;
 }
 
