@@ -3,7 +3,7 @@ import {decode, encode} from "iconv-lite";
 export function wrap(text: string, wrapAt: number): string {
     let result = "";
     let sep = ""
-    for(let i = 0; i < text.length; i += wrapAt) {
+    for (let i = 0; i < text.length; i += wrapAt) {
         result += sep + text.substring(i, Math.min(i + wrapAt, text.length));
         sep = "\n";
     }
@@ -25,7 +25,10 @@ export function base64Encode(text: string, encodingName: string): string {
 }
 
 export function base64EncodeLinesSeparately(textInputValue: string, encodingName: string): string {
-    return textInputValue.split(/\r\n|\r|\n/)
-        .map(line => base64Encode(line, encodingName))
-        .join("\n");
+    return (
+        textInputValue
+            .split(/\r\n|\r|\n/)
+            .map(line => base64Encode(line, encodingName))
+            .join("\n")
+    );
 }

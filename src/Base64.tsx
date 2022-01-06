@@ -3,7 +3,7 @@ import {JSX} from "preact";
 
 // Asked here how to type event handlers without accessing the JSXInternal package: https://github.com/preactjs/preact/discussions/3390
 import {JSXInternal} from "preact/src/jsx";
-import {base64Encode, base64EncodeLinesSeparately, wrap} from "./utils";
+import {base64Encode, base64EncodeLinesSeparately, wrap} from "./base64Encoder";
 import TargetedEvent = JSXInternal.TargetedEvent;
 
 function Base64(): JSX.Element {
@@ -26,18 +26,22 @@ function Base64(): JSX.Element {
         }
     }
 
-    function handleWrapOutputChanged(): void {
-        if (separatedLines && !wrapOutput) {
+    function handleWrapOutputClicked(): void {
+        const newWrapOutput = !wrapOutput;
+        // wrap output and separated lines are mutually exclusive features
+        if (separatedLines && newWrapOutput) {
             setSeparatedLines(false)
         }
-        setWrapOutput(!wrapOutput);
+        setWrapOutput(newWrapOutput);
     }
 
-    function handleSeparatedLinesChanged(): void {
-        if (wrapOutput && !separatedLines) {
+    function handleSeparatedLinesClicked(): void {
+        const newSeparatedLines = !separatedLines;
+        // wrap output and separated lines are mutually exclusive features
+        if (wrapOutput && newSeparatedLines) {
             setWrapOutput(false);
         }
-        setSeparatedLines(!separatedLines)
+        setSeparatedLines(newSeparatedLines)
     }
 
     return <>
@@ -63,11 +67,11 @@ function Base64(): JSX.Element {
 
         <div>Base 64:</div>
         <div>
-            <input id="wrap-output" type="checkbox" checked={wrapOutput} onClick={handleWrapOutputChanged}/>
+            <input id="wrap-output" type="checkbox" checked={wrapOutput} onClick={handleWrapOutputClicked}/>
             <label for="wrap-output">Wrap at 76 characters</label>
         </div>
         <div>
-            <input id="encode-lines" type="checkbox" checked={separatedLines} onClick={handleSeparatedLinesChanged}/>
+            <input id="encode-lines" type="checkbox" checked={separatedLines} onClick={handleSeparatedLinesClicked}/>
             <label for="encode-lines">Encode each line separately</label>
         </div>
         <div><textarea id="base64-output" value={encodeTextInput()} cols={80} readonly/></div>
