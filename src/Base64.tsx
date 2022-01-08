@@ -48,13 +48,13 @@ function Base64(): JSX.Element {
         <form id="base64">
             <header>Base 64 Encoder</header>
 
-            <label for="text-input">Input Text</label>
+            <label htmlFor="text-input">Input Text</label>
             <textarea id="text-input"
                       value={textInputValue}
                       onInput={(event: TargetedEvent<HTMLTextAreaElement>): void => setTextInputValue(event.currentTarget.value)}
                       spellcheck={false}/>
 
-            <label for="encoding-select">Encoding</label>
+            <label htmlFor="encoding-select">Encoding</label>
             <select id="encoding-select"
                     value={encodingName}
                     onChange={(event: TargetedEvent<HTMLSelectElement>): void => setEncodingName(event.currentTarget.value)}>
@@ -78,7 +78,7 @@ function Base64(): JSX.Element {
 
             <hr/>
 
-            <label for="base64-output">Base 64</label>
+            <label htmlFor="base64-output">Base 64</label>
             <textarea id="base64-output"
                       value={encodeTextInput()}
                       readonly
