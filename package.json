@@ -7,7 +7,7 @@
     "// Create a 'dist' directory that can be deployed to a server (or just open dist/index.html in IDEA with Open in -> Browser)": "",
     "dist": "run-s check clean:dist assemble",
     "assemble": "parcel build --public-url ./",
-    "// Runs linters, type checks, and (in the future) test":  "",
+    "// Runs linters, type checks, and (in the future) test": "",
     "check": "run-p --aggregate-output --continue-on-error check:*",
     "check:eslint": "eslint src --max-warnings=0 --ext .js,.jsx,.ts,.tsx",
     "// We need to run tsc explicitly for type checking, because parcel runs its own, faster Typescript compiler, that does not check types at all": "",
@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "iconv-lite": "^0.6.3",
-    "normalize.css": "^8.0.1",
     "preact": "^10.6.4",
     "preact-render-to-string": "^5.1.19",
     "preact-router": "^3.2.1",
@@ -41,6 +40,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "npm-run-all": "^4.1.5",
     "parcel": "^2.0.1",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "typescript-plugin-css-modules": "^3.4.0"
   }
 }

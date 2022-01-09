@@ -1,0 +1,44 @@
+
+.fileUpload
+    border: 2px dashed #ffa500
+    display: grid
+    grid-template-columns: max-content auto
+    padding: 0.5em
+
+    &.dragOver
+        background-color: #ffe0aa
+
+    .fileSelectButton
+        margin: 0 10px
+        align-self: center
+        justify-self: start
+
+        &:hover
+            background-color: #eee
+
+    .fileDropHint
+        place-self: center start
+        pointer-events: none
+
+    .fileInfo
+        place-self: center start
+        pointer-events: none
+
+        .fileName
+            color: inherit
+
+        &.invalidFile
+            .fileName
+                color: #999
+
+        .fileSize
+            color: #999
+            margin-left: 0.5em
+
+            &:before
+                content: "("
+            &:after
+                content: ")"
+
+        .fileTooLarge
+            color: #f33

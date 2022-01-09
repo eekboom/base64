@@ -1,21 +1,21 @@
 // Using "~" instead of "../node_modules/" should work, but doesn't :-(
 @import "../node_modules/the-new-css-reset/css/reset.css"
 @import "./reset-reset.sass"
-@import "./base64.sass"
+@import "./base.sass"
 
 body
-  font-family: sans-serif
-  margin: 0.5em
+    font-family: sans-serif
+    margin: 0.5em
 
 label
-  cursor: default
+    cursor: default
 
-button
-  cursor: default
-  border: 1px solid #999
-  border-radius: 4px
-  padding: 2px 6px
-  text-align: center
-
-  &:hover
-    background-color: #eee
+// See for example https://www.a11yproject.com/posts/how-to-hide-content/
+.visuallyHidden
+    clip: rect(0 0 0 0)
+    clip-path: inset(50%)
+    height: 1px
+    overflow: hidden
+    position: absolute
+    white-space: nowrap
+    width: 1px

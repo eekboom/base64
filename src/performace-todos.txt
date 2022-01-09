@@ -1,0 +1,7 @@
+* more async
+    * try creating the objectUrl in a webworker. Is passing large string too much overhead?
+    * wrapping text?
+    * show loading indicators in base64 textarea, "Download" button, "Copy to Clipboard" button
+* after clicking on "Copy to Clipboard": Disable button and show progress indicator until data is in clipboard
+* do not add error messages to the encoded string, show them someplace else
+* maybe have a separate size limit for "Copy to Clipboard"? (my FF tab crashes at about 120MB)

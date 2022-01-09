@@ -1,0 +1,64 @@
+.base64
+    max-width: 140ch
+    margin: 0 auto
+    display: grid
+    grid-column-gap: 1em
+    grid-row-gap: 0.5em
+    grid-template-columns: max-content max-content auto
+
+    header
+        color: darkgreen
+        font-weight: bold
+        display: block
+        grid-column: 1 / 4
+
+    .inputTabs
+        grid-column: 1 / 4
+        display: grid
+        grid-row-gap: 0.5em
+        grid-template-columns: max-content max-content auto
+
+        ul
+            grid-column: 1 / 4
+
+    label
+        grid-column: 1 / 2
+
+    .fileUpload
+        grid-column: 1 / 4
+        height: 5em
+
+    textarea
+        grid-column: 1 / 4
+        resize: vertical
+        border: 1px solid #ccc
+        height: 6em
+        min-height: 3em
+        font-family: monospace
+
+    select
+        grid-column: 2 / 3
+        border: 1px solid #ccc
+
+    input[type=checkbox]
+        justify-self: start
+
+    hr
+        border: 1px solid #ccc
+        grid-column: 1 / 4
+
+    #base64-output
+        background-color: #eee
+
+    .buttonBar
+        grid-column: 3 / 4
+        display: flex
+        justify-content: flex-end
+        align-items: center
+        column-gap: 1em
+
+
+    #base64-download.loading
+        &:before
+            content: "... "
+

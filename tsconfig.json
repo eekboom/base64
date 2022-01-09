@@ -2,6 +2,13 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
-    "isolatedModules": true
+    "isolatedModules": true,
+    "plugins": [
+      {
+        // Makes typescript understand imports of sass files and even makes the contained css classes available for code-completion and
+        // navigation in IDEA via the Typescript Language Service.
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   }
 }
