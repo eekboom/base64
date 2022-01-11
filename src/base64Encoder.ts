@@ -21,7 +21,7 @@ export function base64Encode(text: string, encoding: string): string {
         const binaryString = data.toString("binary");
         return btoa(binaryString);
     } catch (e) {
-        return `Input contains characters outside of ${encoding}`;
+        return `Input contains characters outside of ${encoding2name.get(encoding)}`;
     }
 }
 
