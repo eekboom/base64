@@ -1,5 +1,12 @@
 import {useState} from "preact/hooks";
 import {JSX} from "preact";
+import {encodingGroups} from "./encodings";
+
+const encodingOptions = encodingGroups.map(group => (
+    <optgroup label={group.name}>
+        {group.items.map(item => <option value={item.value}>{item.name ?? item.value}</option>)}
+    </optgroup>
+));
 
 // Asked here how to type event handlers without accessing the JSXInternal package: https://github.com/preactjs/preact/discussions/3390
 import {JSXInternal} from "preact/src/jsx";
@@ -9,9 +16,8 @@ import TargetedEvent = JSXInternal.TargetedEvent;
 function Base64(): JSX.Element {
     const [textInputValue, setTextInputValue] = useState("");
     const [wrapOutput, setWrapOutput] = useState(false);
-    const [encodingName, setEncodingName] = useState("UTF-8");
+    const [encoding, setEncoding] = useState("_UTF-8");
     const [separatedLines, setSeparatedLines] = useState(false)
-
     const wrapAt = 76;
 
     function encodeTextInput(): string {
@@ -19,9 +25,9 @@ function Base64(): JSX.Element {
             if (wrapOutput) {
                 return "Invalid Configuration: It is not possible to select the 'wrap output' and 'encode lines separately' options together."
             }
-            return base64EncodeLinesSeparately(textInputValue, encodingName);
+            return base64EncodeLinesSeparately(textInputValue, encoding);
         } else {
-            const output = base64Encode(textInputValue, encodingName)
+            const output = base64Encode(textInputValue, encoding)
             return wrapOutput ? wrap(output, wrapAt) : output;
         }
     }
@@ -63,18 +69,9 @@ function Base64(): JSX.Element {
 
             <label htmlFor="encoding-select">Encoding</label>
             <select id="encoding-select"
-                    value={encodingName}
-                    onChange={(event: TargetedEvent<HTMLSelectElement>): void => setEncodingName(event.currentTarget.value)}>
-                <option>UTF-8</option>
-                <option>ISO-8859-15</option>
-                <option>ISO-8859-1</option>
-                <option>ASCII</option>
-                <option>win1251</option>
-                <option>win1252</option>
-                <option>UTF-16LE</option>
-                <option>UTF-16BE</option>
-                <option>UTF-32LE</option>
-                <option>UTF-32BE</option>
+                    value={encoding}
+                    onChange={(event: TargetedEvent<HTMLSelectElement>): void => setEncoding(event.currentTarget.value)}>
+                {encodingOptions}
             </select>
 
             <label htmlFor="encode-lines">Encode each line separately</label>
