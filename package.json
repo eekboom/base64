@@ -36,7 +36,8 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.1",
-    "@types/jest": "^27.4.0",
+    "@types/enzyme": "^3.10.11",
+    "@types/jest": "^27.4.7",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "enzyme": "^3.11.0",

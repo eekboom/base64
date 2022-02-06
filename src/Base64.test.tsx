@@ -6,7 +6,7 @@ describe('test Base64 component', () => {
         const wrapper = shallow(<Base64 />);
         expect(wrapper.find('#text-input')).toExist();
         expect(wrapper.find('#encoding-select')).toExist();
-        expect(wrapper.find('#encoding-select')).toHaveValue('UTF-8');
+        expect(wrapper.find('#encoding-select')).toHaveValue('_UTF-8');
         expect(wrapper.find('#encode-lines')).toExist();
         expect(wrapper.find('#encode-lines')).not.toBeChecked();
         expect(wrapper.find('#wrap-output')).toExist();
