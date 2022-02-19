@@ -2,6 +2,9 @@ import {decode, encode} from "iconv-lite";
 import { encoding2name } from "./encodings";
 
 export function wrap(text: string, wrapAt: number): string {
+    if (wrapAt <= 0) {
+        throw Error("The number of characters the text should be wrapped at must be greater than 0.")
+    }
     let result = "";
     let sep = ""
     for (let i = 0; i < text.length; i += wrapAt) {
